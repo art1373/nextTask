@@ -13,6 +13,7 @@ const fetcher = async ({ url, method, body, json = true }: FetcherRequest) => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
+    next: { revalidate: 3 },
   })
 
   if (!res.ok) {
@@ -25,7 +26,7 @@ const fetcher = async ({ url, method, body, json = true }: FetcherRequest) => {
   }
 }
 
-export const register = async (user) => {
+export const register = async (user: any) => {
   return fetcher({
     url: '/api/register',
     method: 'POST',
@@ -34,11 +35,19 @@ export const register = async (user) => {
   })
 }
 
-export const signin = async (user) => {
+export const signin = async (user: any) => {
   return fetcher({
     url: '/api/signin',
     method: 'POST',
     body: user,
     json: false,
+  })
+}
+
+export const createNewProject = (name: string) => {
+  return fetcher({
+    url: '/api/project',
+    method: 'POST',
+    body: { name },
   })
 }
