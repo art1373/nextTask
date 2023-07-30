@@ -13,7 +13,6 @@ const fetcher = async ({ url, method, body, json = true }: FetcherRequest) => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    next: { revalidate: 3 },
   })
 
   if (!res.ok) {
